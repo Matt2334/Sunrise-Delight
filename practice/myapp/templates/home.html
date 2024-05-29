@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,33 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GoodFoodGoodMood</title>
-<!--    <link rel="stylesheet" href="style.css">-->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
   </head>
   <body>
     <section style="position:relative; box-sizing:border-box; display:block; ">
-        <img src="food.jpg" style="width: 300px; left:auto; right:0; height:300px;">
-        <div style="width:116px; margin-left:16px; border-color:#454545; border-width: 9; display:block; margin-top:25px; margin-right:444px"></div>
-        <h1 style="text-align: center; margin-left:16px; margin-right:16px; margin-top:-162px; font-weight:700; font-size:6rem;"
-        >Good Food
-            <br>Good Mood</br>
+        <img src="{% static 'frenchtoast.jpg' %}" style="float:right; max-width:40%">
+        <div style="width:116px; margin-left:16px; border-color:#454545; border-width: 9; display:block; margin-top:25px; margin-right:444px">&nbsp</div>
+        <h1 class="title">
+            GOOD FOOD
+            <div class="title-rec">&nbsp</div>
+<!--            fabd02-->
+            <br>GOOD MOOD
         </h1>
-        <div style="flex-direction:row; display:flex; max-width:50%; word-wrap:break-word; margin: 20px; font-family:Open Sans, sans-serif; font-size: 16px;. line-height:1.6rem;">
+        <div class="content-div">
             <div style="display:block; position:relative; text-align:left;">
-                <p>Born more than 40 years ago as Mr. Natural's Good Food Store, we're
-                    still Missoula's home for locally-produced, organic and bulk foods.
-                    Now our name's a little shorter. And the store’s a lot bigger.
-                    But our mission remains the same:
+                <p style="padding-right:6%">Founded in 2015 by Laurem Ipsum, Sunrise Delight started with a passion for
+                    perfecting her grandmother's French toast recipe. What began in a small kitchen quickly grew into a
+                    beloved breakfast destination, known for our fresh, locally sourced ingredients and innovative
+                    twists on classic flavors. Join us for a taste of tradition and creativity every morning.
                 </p>
-                <a style="text-decoration:none; color:black;" href="url">Read More</a>
+                <a class="read-more" href="url">Read More</a>
             </div>
-            <div style="display:block; position:relative; text-align:left">
-                <p>The Good Food Store is dedicated to supporting a healthy community.
-                    We provide a wide selection of organic food and natural products,
-                    conduct our business in an ethical and respectful manner and donate
-                    to organizations in need.
+            <div class="content-mission-statement">
+                <p style="padding-left: 5%;">At Sunrise Delight, we aim to brighten your mornings with the finest French
+                    toast made from fresh, locally sourced ingredients. We blend traditional flavors with innovative
+                    twists to create an unforgettable breakfast experience. Our mission is to bring warmth and
+                    happiness to every customer, one delicious bite at a time.
                 </p>
+                <a class="order-now" href="/orders">Order Now</a>
             </div>
         </div>
+    </section>
+    <section>
+
     </section>
 	<script src="index.js"></script>
   </body>

@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>GoodFoodGoodMood</title>
+        <link rel="stylesheet" href="{% static 'order-style.css' %}">
+    </head>
+    <body>
+        <div class="order-form">
+            <form class="orders" method="POST" action=""> {% csrf_token %}
+                <h2>Sunset Delight Order Form</h2>
+                <div class="inst">Please fill out the form below to place your order.</div>
+                <div>
+                    <label style="display:block; padding-top:10px; padding-bottom:10px; font-weight:700;">French Toast (Maple Syrup included)</label>
+                    <div class="surrounding-div">
+                        <select name="Topping(s)" class="minimal" style="width:100%;">
+                            <option valuedisabled>Select your toppings</option>
+                            <option value="blueberries">Blueberries</option>
+                            <option value="bananna">Bananna</option>
+                            <option value="mixed berries">Mixed berries (Strawberries, Blueberries, Rhaspberries)</option>
+                        </select>
+                    </div>
+                    <div class="surrounding-div">
+                        <input name="Quantity" class="input-info" placeholder="Enter Quantity" inputmode="text" autocomplete="off">
+                    </div>
+                    <div class="surrounding-div">
+                        <input name="Delivery Date" class="input-info" placeholder="Delivery Date" type="date" inputmode="text" autocomplete="off">
+                    </div>
+                    <div class="surrounding-div">
+                        <label style="display:block; font-weight:700;">Delivery Times</label>
+                        <div>
+                            <input value="9am" class="checkbox" name="Delivery Times" type="checkbox">
+                            <label style="width:45%;" for="9am">9:00 AM - 11:00 AM</label>
+                            <input value="11am" class="checkbox" name="Delivery Times" type="checkbox"">
+                            <label style="width:43%;" for="11am">11:00 AM - 1:00 PM</label>
+                            <input value="1pm" class="checkbox"  name="Delivery Times" type="checkbox">
+                            <label style="width:45%;" for="1pm">1:00 PM - 3:00 PM</label>
+                            <input value="3pm" class="checkbox" name="Delivery Times" type="checkbox">
+                            <label style="width:40%;" for="3pm">3:00 PM - 5:00 PM</label>
+                        </div>
+                    </div>
+                    <div class="surrounding-div">
+                        <input name="Name" class="input-info" placeholder="Name" inputmode="text" autocomplete="off">
+                    </div>
+                    <div class="surrounding-div">
+                        <input name="Email" class="input-info" style="width:45%; margin-right:9%" placeholder="Email" inputmode="text" autocomplete="off">
+                        <input name="Phone" class="input-info" style="width:45%;" placeholder="Phone" inputmode="text" autocomplete="off">
+                    </div>
+                    <div class="surrounding-div">
+                        <textarea name="Additional Comments" max-length="1000" placeholder="Additional Comments" class="input-comments"></textarea>
+                    </div>
+                    <button class="place-order">Place Order</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
