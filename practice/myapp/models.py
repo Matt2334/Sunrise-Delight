@@ -14,6 +14,7 @@ class AddOrder(models.Model):
     phone = models.CharField("Phone Number:", null=False, blank=False, max_length=11)
     comments = models.TextField("Additional Comments", max_length=1000)
     delivery_time =models.CharField("Delivery Time:", null=False, blank=False, max_length=10)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.name}'s Order"
