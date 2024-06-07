@@ -21,6 +21,6 @@ Sunrise-Delight is a sample website for a restaurant's ordering system. The rest
 ## Technologies Used
 
 - **Front-end**: HTML, CSS, JavaScript
-- **Back-end**: Django, Django Rest Framework, DateTime library, Django Http: JsonResponse. 
+- **Back-end**: Python: Django, Django Rest Framework, DateTime library, Django Http: JsonResponse. 
 - **Database**: PostgreSQL
 
