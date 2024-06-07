@@ -8,4 +8,4 @@ class PromotionSerializer(serializers.ModelSerializer):
 class PromotionUsageSerializer(serializers.ModelSerializer):
     class Meta:
         model = PromotionUsage
-        fields = ["promotion", "user", "date_used"]
+        fields = ["promotion", "user_profile", "date_used"]

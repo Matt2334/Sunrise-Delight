@@ -73,9 +73,25 @@
                         <textarea name="Additional Comments" value="{{comments}}" max-length="1000" placeholder="Additional Comments" class="input-comments"></textarea>
                     </div>
 
-
                     <div class="surrounding-div">
-                        <input name="promo-code" class="input-info" placeholder="Discount Code" inputmode="text">
+                        <input name="promo-code" id="promo" class="input-info"  style="width:45%; margin-right:9%" placeholder="Discount Code" inputmode="text">
+                        <button onclick=promoChecker() style="width:45%;">Apply Code</button>
+                        <script>
+                           async function promoChecker(){
+                                const response = await fetch('/api/promotions/apply_promotion/', {
+                                    method:'POST',
+                                    headers:{
+                                    "Content-Type": "application/json",
+                                    "name":document.getElementById('name').value,
+                                    "code": document.getElementById('promo').value,
+                                    "X-CSRFToken": document.cookie.split(';')[0].split('=')[1],
+                                    }
+                                });
+                                body: JSON.stringify({})
+                                const json = await response.json();
+                                console.log(json);
+                            }
+                        </script>
                     </div>
                     <button onselect=submit("orders") class="place-order">Place Order</button>
                 </div>

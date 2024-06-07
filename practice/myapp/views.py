@@ -6,6 +6,8 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import viewsets
+import json
+from django.http import JsonResponse
 
 def home(request):
     return render(request, "home.html")
@@ -48,8 +50,6 @@ def order(request):
         # return render("/success")
     return render(request, "order.html")
 
-
-
 class PromotionViewSet(viewsets.ModelViewSet):
     queryset = Promotion.objects.all()
     serializer_class = PromotionSerializer
@@ -57,15 +57,23 @@ class PromotionViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['POST'], permission_classes=[AllowAny])
     def apply_promotion(self, request):
-        code = request.data.get("code")
-        user = request.user
+        code = request.headers.get("code")
+        name = request.headers.get('name')
+        print(code, name)
+        if not name:
+            return JsonResponse({'error': 'Missing name'}, status=400)
 
         try:
             promotion = Promotion.objects.get(code=code)
-            if PromotionUsage.objects.filter(promotion=promotion, user=user).exists():
-                return Response({'success': False, 'message': 'You have already used this promotion.'})
-            PromotionUsage.objects.create(promotion=promotion, user=user)
-            return Response({'success':True, 'discount_value':promotion.discount_value, 'discount_type':promotion.discount_type})
         except Promotion.DoesNotExist:
-            return Response({'success':False, 'message':'Promotion Code does not exist.'})
+            return Response({'success': False, 'message': 'Promotion Code does not exist.'})
 
+        if PromotionUsage.objects.filter(promotion=promotion, name=name).exists():
+            return JsonResponse({'error': 'You have already used this promotion.'}, status=400)
+
+        PromotionUsage.objects.create(promotion=promotion, name=name)
+        return JsonResponse({
+            'success': 'valid',
+            'discount_value': promotion.discount_value,
+            'discount_type': promotion.discount_type,
+        }, status=200)
