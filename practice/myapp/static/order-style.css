@@ -83,3 +83,16 @@ option{
 label{
     display:inline-block;
 }
+.apply_code{
+    width:45%;
+    height: 3vw;
+    border-radius:12px;
+    background:#4e8cbe;
+    color:#FFE8C8;
+    text-align:center;
+    font-family: open-sans, sans-serif;
+    border-radius:20px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+}
