@@ -3,13 +3,12 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>GoodFoodGoodMood</title>
+        <title>Sunrise Delight</title>
         <link rel="stylesheet" href="{% static 'order-style.css' %}">
     </head>
-    <body>
         <div class="order-form">
             <form class="orders" method="POST" action=""> {% csrf_token %}
-                <h2>Sunset Delight Order Form</h2>
+                <h2>Sunrise Delight Order Form</h2>
                 <div class="inst">Please fill out the form below to place your order.</div>
                 <div>
                     <label style="display:block; padding-top:10px; padding-bottom:10px; font-weight:700;">French Toast (Maple Syrup included)</label>
@@ -21,12 +20,23 @@
                             <option value="mix">Mixed berries (Strawberries, Blueberries, Rhaspberries)</option>
                         </select>
                     </div>
+
                     <div class="surrounding-div">
-                        <input name="Quantity" class="input-info" placeholder="Enter Quantity" inputmode="text" autocomplete="off">
+                        {% if error.quantity %}
+                            <p>{{ error.quantity }}</p>
+                        {% endif %}
+                        <input required id="quantity" name="Quantity" type="numeric" class="input-info" value="{{quantity}}" placeholder="Enter Quantity"
+                               inputmode="text" autocomplete="off">
                     </div>
                     <div class="surrounding-div">
-                        <input name="Delivery Date" class="input-info" placeholder="Delivery Date" type="date" inputmode="text" autocomplete="off">
+                        {% if error.delivery_date %}
+                            <p>{{ error.delivery_date }}</p>
+                        {% endif %}
+                        <input name="Delivery Date" id="delivery_date" required value="{{delivery_date}}" class="input-info"
+                               placeholder="Delivery Date" type="date" inputmode="text">
                     </div>
+
+
                     <div class="surrounding-div">
                         <label style="display:block; font-weight:700;">Delivery Times</label>
                         <div>
@@ -39,18 +49,51 @@
                             <input value="3pm" class="checkbox" name="Delivery Times" type="checkbox">
                             <label style="width:40%;" for="3pm">3:00 PM - 5:00 PM</label>
                         </div>
+
                     </div>
+                        <div class="surrounding-div">
+                            {% if error.name %}
+                                <p>{{ error.name }}</p>
+                            {% endif %}
+                            <input name="Name" id="name" required class="input-info" value="{{name}}" placeholder="Name" inputmode="text" >
+                        </div>
+
+
                     <div class="surrounding-div">
-                        <input name="Name" class="input-info" placeholder="Name" inputmode="text" autocomplete="off">
+                        {% if error.phone %}
+                            <p>{{ error.phone }}</p>
+                        {% endif %}
+                        <input name="Email" value="{{email}}" class="input-info" style="width:45%; margin-right:9%" placeholder="Email" inputmode="text">
+                        <input id="phone" name="Phone" type="numeric" value="{{phone}}" oninvalid="this.setCustomValidity('{{ error.phone }}')"
+                               oninput="this.setCustomValidity('')" class="input-info" style="width:45%;" placeholder="Phone" inputmode="text">
                     </div>
+
+
                     <div class="surrounding-div">
-                        <input name="Email" class="input-info" style="width:45%; margin-right:9%" placeholder="Email" inputmode="text" autocomplete="off">
-                        <input name="Phone" class="input-info" style="width:45%;" placeholder="Phone" inputmode="text" autocomplete="off">
+                        <textarea name="Additional Comments" value="{{comments}}" max-length="1000" placeholder="Additional Comments" class="input-comments"></textarea>
                     </div>
+
                     <div class="surrounding-div">
-                        <textarea name="Additional Comments" max-length="1000" placeholder="Additional Comments" class="input-comments"></textarea>
+                        <input name="promo-code" id="promo" class="input-info"  style="width:45%; margin-right:9%" placeholder="Discount Code" inputmode="text">
+                        <button onclick=promoChecker() style="width:45%;">Apply Code</button>
+                        <script>
+                           async function promoChecker(){
+                                const response = await fetch('/api/promotions/apply_promotion/', {
+                                    method:'POST',
+                                    headers:{
+                                    "Content-Type": "application/json",
+                                    "name":document.getElementById('name').value,
+                                    "code": document.getElementById('promo').value,
+                                    "X-CSRFToken": document.cookie.split(';')[0].split('=')[1],
+                                    }
+                                });
+                                body: JSON.stringify({})
+                                const json = await response.json();
+                                console.log(json);
+                            }
+                        </script>
                     </div>
-                    <button class="place-order">Place Order</button>
+                    <button onselect=submit("orders") class="place-order">Place Order</button>
                 </div>
             </form>
         </div>
