@@ -6,7 +6,7 @@ class AddOrder(models.Model):
         ("ban","Bannana"),
         ("mix","Mixed Berries"),
     ]
-    topping = models.CharField(max_length=14, null=False, blank=False, default='Default', choices=TOPPINGS)
+    topping = models.CharField(max_length=14, null=False, blank=False, choices=TOPPINGS)
     quantity = models.IntegerField("Quantity", null=False, blank=False)
     delivery_date = models.DateField("Date", null=False, blank=False)
     name = models.CharField("Full Name:", null=False, max_length=40)
@@ -14,7 +14,6 @@ class AddOrder(models.Model):
     phone = models.CharField("Phone Number:", null=False, blank=False, max_length=11)
     comments = models.TextField("Additional Comments", max_length=1000)
     delivery_time =models.CharField("Delivery Time:", null=False, blank=False, max_length=10)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.name}'s Order"
