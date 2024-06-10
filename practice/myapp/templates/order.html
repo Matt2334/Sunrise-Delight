@@ -17,7 +17,7 @@
                             <option valuedisabled>Select your toppings</option>
                             <option value="blu">Blueberries</option>
                             <option value="ban">Bananna</option>
-                            <option value="mix">Mixed berries (Strawberries, Blueberries, Rhaspberries)</option>
+                            <option value="mix">Mixed berries (Strawberries, Blueberries, Raspberries)</option>
                         </select>
                     </div>
 
@@ -35,8 +35,6 @@
                         <input name="Delivery Date" id="delivery_date" required value="{{delivery_date}}" class="input-info"
                                placeholder="Delivery Date" type="date" inputmode="text">
                     </div>
-
-
                     <div class="surrounding-div">
                         <label style="display:block; font-weight:700;">Delivery Times</label>
                         <div>
@@ -49,7 +47,6 @@
                             <input value="3pm" class="checkbox" name="Delivery Times" type="checkbox">
                             <label style="width:40%;" for="3pm">3:00 PM - 5:00 PM</label>
                         </div>
-
                     </div>
                         <div class="surrounding-div">
                             {% if error.name %}
@@ -57,8 +54,6 @@
                             {% endif %}
                             <input name="Name" id="name" required class="input-info" value="{{name}}" placeholder="Name" inputmode="text" >
                         </div>
-
-
                     <div class="surrounding-div">
                         {% if error.phone %}
                             <p>{{ error.phone }}</p>
@@ -67,15 +62,12 @@
                         <input id="phone" name="Phone" type="numeric" value="{{phone}}" oninvalid="this.setCustomValidity('{{ error.phone }}')"
                                oninput="this.setCustomValidity('')" class="input-info" style="width:45%;" placeholder="Phone" inputmode="text">
                     </div>
-
-
                     <div class="surrounding-div">
                         <textarea name="Additional Comments" value="{{comments}}" max-length="1000" placeholder="Additional Comments" class="input-comments"></textarea>
                     </div>
-
                     <div class="surrounding-div">
                         <input name="promo-code" id="promo" class="input-info"  style="width:45%; margin-right:9%" placeholder="Discount Code" inputmode="text">
-                        <button onclick=promoChecker() style="width:45%;">Apply Code</button>
+                        <button onclick=promoChecker() type="button" class="apply_code">Apply Code</button>
                         <script>
                            async function promoChecker(){
                                 const response = await fetch('/api/promotions/apply_promotion/', {
