@@ -35,6 +35,7 @@ def order(request):
             error['phone'] =  'Please enter your phone number'
         if error:
             return render(request, "order.html", {
+                # f'{topping}': topping,
                 'quantity': quantity,
                 'delivery_date': delivery_date,
                 'name': name,
@@ -44,7 +45,7 @@ def order(request):
                 'delivery_time': delivery_time,
                 'error': error,
             })
-        new_order = AddOrder(quantity=quantity, delivery_date=delivery_date, name=name, email=email, phone=phone,
+        new_order = AddOrder(topping=topping, quantity=quantity, delivery_date=delivery_date, name=name, email=email, phone=phone,
                              comments=comments, delivery_time=delivery_time)
         new_order.save()
         # return render("/success")
