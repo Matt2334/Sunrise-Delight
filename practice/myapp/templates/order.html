@@ -67,7 +67,7 @@
                     </div>
                     <div class="surrounding-div">
                         <input name="promo-code" id="promo" class="input-info"  style="width:45%; margin-right:9%" placeholder="Discount Code" inputmode="text">
-                        <button onclick=promoChecker() class="apply_code">Apply Code</button>
+                        <button onclick=promoChecker() type="button" class="apply_code">Apply Code</button>
                         <script>
                            async function promoChecker(){
                                 const response = await fetch('/api/promotions/apply_promotion/', {
